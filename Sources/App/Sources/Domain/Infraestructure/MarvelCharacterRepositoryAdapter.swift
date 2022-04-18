@@ -8,16 +8,31 @@
 import Data
 
 class MarvelCharacterRepositoryAdapter: MarvelCharacterRepository {
-    private let marvelHttpRepository = MarvelHttpRepository()
+    private let marvelHttpRepository: MarvelHttpRepository
     
-    func getCharacters(limit: Int, offset: Int) -> [Character] {
-        return [Character(
-            id: 1,
-            name: "name",
-            description: "description",
-            thumbnail: "thumbnail"
-        )]
+    init (marvelHttpRepository: MarvelHttpRepository) {
+        self.marvelHttpRepository = marvelHttpRepository
     }
     
+    func getCharacters(limit: Int, offset: Int) -> [Character] {
+        let characters = marvelHttpRepository.findCharacters(limit: limit, offset: offset)
+        return characters.compactMap { entity in
+            convert(characterEntity: entity)
+        }
+    }
+}
+
+private extension MarvelCharacterRepositoryAdapter {
     
+    func convert(characterEntity: CharacterEntity) -> Character {
+        return Character(
+            id: characterEntity.id,
+            name: characterEntity.name,
+            description: characterEntity.description,
+            thumbnail: Thumbnail(
+                url: characterEntity.thumbnail.url,
+                thumbnailExtension: characterEntity.thumbnail.thumbnailExtension
+            )
+        )
+    }
 }

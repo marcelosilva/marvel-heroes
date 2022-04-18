@@ -1,0 +1,45 @@
+{
+  "configurations" : [
+    {
+      "id" : "494C32F9-D6C4-4224-BCEB-D134690BD57F",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Sources\/App",
+        "identifier" : "AppTests",
+        "name" : "AppTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Sources\/Data",
+        "identifier" : "DataTests",
+        "name" : "DataTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Sources\/Presentation",
+        "identifier" : "PresentationTests",
+        "name" : "PresentationTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Sources\/Shared",
+        "identifier" : "SharedTests",
+        "name" : "SharedTests"
+      }
+    }
+  ],
+  "version" : 1
+}
