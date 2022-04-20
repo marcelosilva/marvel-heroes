@@ -6,19 +6,33 @@
 //
 
 import Data
+import Shared
+import Combine
 
-class MarvelCharacterRepositoryAdapter: MarvelCharacterRepository {
+public class MarvelCharacterRepositoryAdapter: MarvelCharacterRepositoryProtocol {
     private let marvelHttpRepository: MarvelHttpRepository
-    
-    init (marvelHttpRepository: MarvelHttpRepository) {
+
+    public init(marvelHttpRepository: MarvelHttpRepository) {
         self.marvelHttpRepository = marvelHttpRepository
     }
-    
-    func getCharacters(limit: Int, offset: Int) -> [Character] {
-        let characters = marvelHttpRepository.findCharacters(limit: limit, offset: offset)
-        return characters.compactMap { entity in
-            convert(characterEntity: entity)
+
+    public init() {
+        marvelHttpRepository = MarvelHttpRepository()
+    }
+
+    public func getCharacters(limit: Int, offset: Int) -> AnyPublisher<[Character], NetworkError> {
+        marvelHttpRepository.findCharacters(limit: limit, offset: offset)
+        .flatMap { [weak self] data -> AnyPublisher<[Character], NetworkError> in
+            Just(data.compactMap { entity in
+                self?.convert(characterEntity: entity)
+            })
+            .setFailureType(to: NetworkError.self)
+            .eraseToAnyPublisher()
         }
+        .mapError { networkError in
+            networkError
+        }
+        .eraseToAnyPublisher()
     }
 }
 
@@ -30,8 +44,8 @@ private extension MarvelCharacterRepositoryAdapter {
             name: characterEntity.name,
             description: characterEntity.description,
             thumbnail: Thumbnail(
-                url: characterEntity.thumbnail.url,
-                thumbnailExtension: characterEntity.thumbnail.thumbnailExtension
+                url: characterEntity.thumbnail?.url,
+                thumbnailExtension: characterEntity.thumbnail?.thumbnailExtension
             )
         )
     }

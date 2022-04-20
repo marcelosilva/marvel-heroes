@@ -5,6 +5,9 @@
 //  Created by Marcelo Silva on 16/4/22.
 //
 
-public protocol MarvelCharacterRepository {
-    func getCharacters(limit: Int, offset: Int) -> [Character]
+import Combine
+import Shared
+
+public protocol MarvelCharacterRepositoryProtocol {
+    func getCharacters(limit: Int, offset: Int) -> AnyPublisher<[Character], NetworkError>
 }

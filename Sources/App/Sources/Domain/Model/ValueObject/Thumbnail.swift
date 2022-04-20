@@ -6,10 +6,10 @@
 //
 
 public struct Thumbnail: Equatable {
-    let url: String
-    let thumbnailExtension: String
+    let url: String?
+    let thumbnailExtension: String?
     
-    public init(url: String, thumbnailExtension: String) {
+    public init(url: String?, thumbnailExtension: String?) {
         self.url = url
         self.thumbnailExtension = thumbnailExtension
     }
