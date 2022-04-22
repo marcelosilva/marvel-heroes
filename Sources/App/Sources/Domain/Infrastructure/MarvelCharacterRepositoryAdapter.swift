@@ -10,9 +10,9 @@ import Shared
 import Combine
 
 public class MarvelCharacterRepositoryAdapter: MarvelCharacterRepositoryProtocol {
-    private let marvelHttpRepository: MarvelHttpRepository
+    private let marvelHttpRepository: MarvelHttpRepositoryProtocol
 
-    public init(marvelHttpRepository: MarvelHttpRepository) {
+    public init(marvelHttpRepository: MarvelHttpRepositoryProtocol) {
         self.marvelHttpRepository = marvelHttpRepository
     }
 
@@ -20,10 +20,16 @@ public class MarvelCharacterRepositoryAdapter: MarvelCharacterRepositoryProtocol
         marvelHttpRepository = MarvelHttpRepository()
     }
 
-    public func getCharacters(limit: Int, offset: Int) -> AnyPublisher<[Character], NetworkError> {
-        marvelHttpRepository.findCharacters(limit: limit, offset: offset)
+    public func getCharacters(queryRequest: QueryRequest) -> AnyPublisher<[Character], NetworkError> {
+        marvelHttpRepository
+            .findCharacters(
+                limit: queryRequest.limit,
+                offset: queryRequest.offset,
+                search: queryRequest.search,
+                sorting: queryRequest.sorting
+            )
         .flatMap { [weak self] data -> AnyPublisher<[Character], NetworkError> in
-            Just(data.compactMap { entity in
+            Just(data.data.results.compactMap { entity in
                 self?.convert(characterEntity: entity)
             })
             .setFailureType(to: NetworkError.self)
@@ -39,13 +45,12 @@ public class MarvelCharacterRepositoryAdapter: MarvelCharacterRepositoryProtocol
 private extension MarvelCharacterRepositoryAdapter {
     
     func convert(characterEntity: CharacterEntity) -> Character {
-        return Character(
+        Character(
             id: characterEntity.id,
             name: characterEntity.name,
             description: characterEntity.description,
             thumbnail: Thumbnail(
-                url: characterEntity.thumbnail?.url,
-                thumbnailExtension: characterEntity.thumbnail?.thumbnailExtension
+                url: characterEntity.thumbnail.path
             )
         )
     }

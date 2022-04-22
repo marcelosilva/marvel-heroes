@@ -15,7 +15,26 @@ public class CharactersQueryHandler {
     }
     
     public func doExecute(query: CharactersQuery) -> AnyPublisher<[Character], DomainError> {
-        characterService.getCharacters(limit: query.limit, offset: query.offset)
+        characterService.getCharacters(
+            limit: query.limit,
+            offset: query.offset,
+            sorting: translateSorting(query.sorting),
+            search: query.textQuery
+        )
     }
-    
+}
+
+private extension CharactersQueryHandler {
+    func translateSorting(_ sorting: CharactersQuerySorting) -> String {
+        switch sorting {
+        case .nameAsc:
+            return "name"
+        case .nameDesc:
+            return "-name"
+        case .modifiedAsc:
+            return "modified"
+        case .modifiedDesc:
+            return "-modified"
+        }
+    }
 }

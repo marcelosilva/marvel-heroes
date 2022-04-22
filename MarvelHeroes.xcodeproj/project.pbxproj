@@ -14,7 +14,7 @@
 		9CE89468280A08ED0034BD3B /* Shared in Resources */ = {isa = PBXBuildFile; fileRef = 9CE89467280A08ED0034BD3B /* Shared */; };
 		9CFBED83280B5481007B2141 /* App in Resources */ = {isa = PBXBuildFile; fileRef = 9CFBED82280B5480007B2141 /* App */; };
 		9CFBED86280B5BB2007B2141 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 9CFBED85280B5BB2007B2141 /* App */; };
-		9CFBED88280B5BB2007B2141 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = 9CFBED87280B5BB2007B2141 /* Data */; };
+		9CFBED88280B5BB2007B2141 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = 9CFBED87280B5BB2007B2141 /* Data */; settings = {ATTRIBUTES = (Required, ); }; };
 		9CFBED8A280B5BB2007B2141 /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = 9CFBED89280B5BB2007B2141 /* Presentation */; };
 		9CFBED8C280B5BB2007B2141 /* Shared in Frameworks */ = {isa = PBXBuildFile; productRef = 9CFBED8B280B5BB2007B2141 /* Shared */; };
 /* End PBXBuildFile section */
@@ -25,6 +25,7 @@
 		9CA3B289280A03BC00945B11 /* MarvelHeroes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelHeroes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CA3B290280A03BD00945B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CA3B293280A03BD00945B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9CBE60282811F79D0029F3B5 /* MarvelHeroes-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MarvelHeroes-Info.plist"; sourceTree = "<group>"; };
 		9CE89460280A07FD0034BD3B /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Presentation; sourceTree = "<group>"; };
 		9CE89465280A08E50034BD3B /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = "<group>"; };
 		9CE89467280A08ED0034BD3B /* Shared */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Shared; sourceTree = "<group>"; };
@@ -49,6 +50,7 @@
 		9CA3B280280A03BC00945B11 = {
 			isa = PBXGroup;
 			children = (
+				9CBE60282811F79D0029F3B5 /* MarvelHeroes-Info.plist */,
 				9CE8945E280A07B00034BD3B /* Sources */,
 				9C5365EF280DF593003A6085 /* Default.xctestplan */,
 				9CA3B292280A03BD00945B11 /* Preview Content */,
@@ -143,6 +145,8 @@
 				Base,
 			);
 			mainGroup = 9CA3B280280A03BC00945B11;
+			packageReferences = (
+			);
 			productRefGroup = 9CA3B28A280A03BC00945B11 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -300,12 +304,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = QB8QTFQ929;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MarvelHeroes-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -318,6 +324,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcelosilva.MarvelHeroes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -329,12 +336,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = QB8QTFQ929;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MarvelHeroes-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -347,6 +356,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcelosilva.MarvelHeroes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -22,9 +22,6 @@ let package = Package(
         .target(
             name: "Shared",
             dependencies: [],
-        path: "Sources"),
-        .testTarget(
-            name: "SharedTests",
-            dependencies: ["Shared"]),
+        path: "Sources")
     ]
 )

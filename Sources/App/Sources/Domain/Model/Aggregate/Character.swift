@@ -6,11 +6,11 @@
 //
 
 public struct Character: Equatable {
-    let id: Int
-    let name: String
-    let description: String
-    let thumbnail: Thumbnail
-    let comics: [Comic]?
+    public let id: Int
+    public let name: String
+    public let description: String
+    public let thumbnail: Thumbnail
+    public let comics: [Comic]?
 
     public init(id: Int, name: String, description: String, thumbnail: Thumbnail, comics: [Comic]? = nil) {
         self.id = id

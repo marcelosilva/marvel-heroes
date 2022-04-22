@@ -6,20 +6,33 @@
 //
 
 import App
+import Combine
 
 public class CharacterServiceMock: CharacterServiceProtocol {
-
     var invokedGetCharacters = false
     var invokedGetCharactersCount = 0
-    var invokedGetCharactersParameters: (limit: Int, offset: Int)?
+    var invokedGetCharactersParameters: (limit: Int, offset: Int, sorting: String?, search: String?)?
     var invokedGetCharactersParametersList = [(limit: Int, offset: Int)]()
-    var stubbedGetCharactersResult: [Character]! = []
+    var stubbedGetCharactersResult: [Character]!
 
-    public func getCharacters(limit: Int, offset: Int) -> [Character] {
+    public func getCharacters(
+        limit: Int,
+        offset: Int,
+        sorting: String?,
+        search: String?
+    ) -> AnyPublisher<[Character], DomainError> {
         invokedGetCharacters = true
         invokedGetCharactersCount += 1
-        invokedGetCharactersParameters = (limit, offset)
+        invokedGetCharactersParameters = (limit, offset, sorting, search)
         invokedGetCharactersParametersList.append((limit, offset))
-        return stubbedGetCharactersResult
+        
+        guard let dataStub = stubbedGetCharactersResult else {
+            return Fail(error: DomainError.repositoryConnectionError)
+                .eraseToAnyPublisher()
+        }
+        
+        return Just(dataStub)
+            .setFailureType(to: DomainError.self)
+            .eraseToAnyPublisher()
     }
 }
