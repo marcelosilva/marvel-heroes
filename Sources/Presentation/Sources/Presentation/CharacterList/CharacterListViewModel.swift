@@ -7,19 +7,19 @@ import App
 import SwiftUI
 
 
-enum ContentViewState {
+enum CharacterListViewState {
     case loading
     case loaded
 }
 
-enum ContentViewEvent {
+enum CharacterListViewEvent {
     case search(ContentViewData)
     case load(ContentViewData)
     case selectItem(CharacterItem)
 }
 
-public class ContentViewModel: ObservableObject {
-    @Published var state: ContentViewState = .loaded
+public class CharacterListViewModel: ObservableObject {
+    @Published var state: CharacterListViewState = .loaded
     @Published var items = [CharacterItem]()
     @Published var selectedItem: CharacterItem?
     
@@ -32,7 +32,7 @@ public class ContentViewModel: ObservableObject {
             )
     )
 
-    func process(event: ContentViewEvent) {
+    func process(event: CharacterListViewEvent) {
         switch event {
         case .load(let contentViewData):
             loadMore(eventData: contentViewData)
@@ -46,7 +46,7 @@ public class ContentViewModel: ObservableObject {
     }
 }
 
-private extension ContentViewModel {
+private extension CharacterListViewModel {
     func loadMore(eventData: ContentViewData) {
         if state == .loading {
             return

@@ -23,7 +23,8 @@ let package = Package(
             dependencies: [
                 "App"
             ],
-            path: "Sources"
+            path: "Sources",
+            resources: [.process("Resources")]
         ),
         .testTarget(
             name: "PresentationTests",

@@ -39,7 +39,7 @@ struct CharacterDetailView: View {
                     minHeight: 0,
                     alignment: .center
                 )
-                .background(Color.marvel4)
+                .background(Color.marvelRed)
                 .cornerRadius(4)
                 .padding(.horizontal)
                 
@@ -54,7 +54,7 @@ struct CharacterDetailView: View {
                         minHeight: 0,
                         alignment: .topLeading
                     )
-                    .background(Color.marvel4)
+                    .background(Color.marvelRed)
                     .cornerRadius(4)
                     .padding(.horizontal)
                 }

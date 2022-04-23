@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @ObservedObject private var viewModel: ContentViewModel
+struct CharacterListView: View {
+    @ObservedObject private var viewModel: CharacterListViewModel
     
     @State var popoverActive = false
     @State private var selectedCharacter: CharacterItem?
     @State private var searchText: String
     @State private var sorting: Sorting
     
-    init(viewModel: ContentViewModel) {
+    init(viewModel: CharacterListViewModel) {
         self.viewModel = viewModel
         _searchText = State(wrappedValue: "")
         _sorting = State(wrappedValue: .nameAsc)
@@ -25,7 +25,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             listView
-            .navigationTitle("Marvel Heroes")
+                .navigationTitle(L10n.navigationTitle)
         }
         .popover(isPresented: $popoverActive, content: {
             if let selectedItem = viewModel.selectedItem {
@@ -36,9 +36,9 @@ struct ContentView: View {
             ToolbarItemGroup(placement: .bottomBar) {
                 HStack {
                     Picker("Sorting", selection: $sorting) {
-                        Text("By Name")
+                        Text(L10n.characterListViewSortByName)
                             .tag(Sorting.nameAsc)
-                        Text("By Last modified")
+                        Text(L10n.characterListViewSortByModifiedDesc)
                             .tag(Sorting.modifiedDesc)
                     }
                     .onChange(of: sorting) { sorting in
@@ -51,10 +51,10 @@ struct ContentView: View {
     }
 }
 
-private extension ContentView {
+private extension CharacterListView {
     
     var searchTextField: some View {
-        TextField("Search", text: $searchText)
+        TextField(L10n.characterListViewSearchPlaceholder, text: $searchText)
             .submitLabel(.search)
             .onSubmit {
                 viewModel.process(event: .search(buildContentData()))
@@ -93,7 +93,7 @@ private extension ContentView {
                 }
             Spacer()
         }.contentShape(Rectangle())
-        .listRowBackground(Color("MarvelColor\(item.id % 4)"))
+            .listRowBackground(Color.randomColorByIndex(index: item.id))
         .onTapGesture {
             viewModel.process(event: .selectItem(item))
             popoverActive.toggle()
@@ -105,8 +105,8 @@ private extension ContentView {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct CharacterListView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(viewModel: ContentViewModel())
+        CharacterListView(viewModel: CharacterListViewModel())
     }
 }

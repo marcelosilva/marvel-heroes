@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9CA3B291280A03BD00945B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CA3B290280A03BD00945B11 /* Assets.xcassets */; };
-		9CA3B294280A03BD00945B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CA3B293280A03BD00945B11 /* Preview Assets.xcassets */; };
 		9CE89462280A07FD0034BD3B /* Presentation in Resources */ = {isa = PBXBuildFile; fileRef = 9CE89460280A07FD0034BD3B /* Presentation */; };
 		9CE89466280A08E50034BD3B /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 9CE89465280A08E50034BD3B /* Data */; };
 		9CE89468280A08ED0034BD3B /* Shared in Resources */ = {isa = PBXBuildFile; fileRef = 9CE89467280A08ED0034BD3B /* Shared */; };
@@ -23,8 +21,6 @@
 		9C5365EB280DED2A003A6085 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		9C5365EF280DF593003A6085 /* Default.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Default.xctestplan; sourceTree = "<group>"; };
 		9CA3B289280A03BC00945B11 /* MarvelHeroes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelHeroes.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9CA3B290280A03BD00945B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9CA3B293280A03BD00945B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9CBE60282811F79D0029F3B5 /* MarvelHeroes-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MarvelHeroes-Info.plist"; sourceTree = "<group>"; };
 		9CE89460280A07FD0034BD3B /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Presentation; sourceTree = "<group>"; };
 		9CE89465280A08E50034BD3B /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = "<group>"; };
@@ -70,7 +66,6 @@
 		9CA3B292280A03BD00945B11 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				9CA3B293280A03BD00945B11 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -82,7 +77,6 @@
 				9CE89467280A08ED0034BD3B /* Shared */,
 				9CE89465280A08E50034BD3B /* Data */,
 				9CE89460280A07FD0034BD3B /* Presentation */,
-				9CA3B290280A03BD00945B11 /* Assets.xcassets */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -164,8 +158,6 @@
 				9CFBED83280B5481007B2141 /* App in Resources */,
 				9CE89462280A07FD0034BD3B /* Presentation in Resources */,
 				9CE89466280A08E50034BD3B /* Data in Resources */,
-				9CA3B294280A03BD00945B11 /* Preview Assets.xcassets in Resources */,
-				9CA3B291280A03BD00945B11 /* Assets.xcassets in Resources */,
 				9CE89468280A08ED0034BD3B /* Shared in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

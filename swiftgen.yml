@@ -1,0 +1,11 @@
+strings:
+  inputs: Sources/Presentation/Sources/Resources/Base.proj
+  outputs:
+    - templateName: structured-swift5
+      output: Sources/Presentation/Sources/Utils/Strings.swift
+xcassets:
+  inputs:
+    - Sources/Presentation/Sources/Resources/Assets.xcassets
+  outputs:
+    - templateName: swift5
+      output: Sources/Presentation/Sources/Utils/Assets.swift

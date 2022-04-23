@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  MarvelHeroes
+
+  Created by Marcelo Silva on 23/4/22.
+  
+*/
+
+
+"NavigationTitle" = "Marvel Heroes";
+
+"CharacterListView_SortByName" = "By Name";
+"CharacterListView_SortByModifiedDesc" = "By Last Modified";
+"CharacterListView_Search_Placeholder" = "Search";
