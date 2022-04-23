@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import App
+@testable import App
 import XCTest
 import Data
 

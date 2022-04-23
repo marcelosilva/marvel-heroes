@@ -12,7 +12,7 @@ class CharacterObjectMother {
     var name = "CharacterName"
     var description = "CharacterDescription"
     var thumbnail = Thumbnail(url: "thumbnailUrl")
-    var comics: [Comic]? = [Comic(id: 1, title: "title", description: "description")]
+    var comics: [Comic]? = [Comic(id: 1, title: "title", thumbnailUrl: "url")]
     
     func withId(id: Int) -> CharacterObjectMother {
         self.id = id
@@ -47,6 +47,5 @@ class CharacterObjectMother {
             thumbnail: thumbnail,
             comics: comics
         )
-    }
-    
+    }    
 }

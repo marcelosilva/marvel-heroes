@@ -9,11 +9,11 @@
 import SwiftUI
 
 public extension Color {
-    static let marvelYellow = Color(Asset.marvelColorYellow.color)
-    static let marvelBlue = Color(Asset.marvelColorBlue.color)
-    static let marvelPink = Color(Asset.marvelColorPink.color)
-    static let marvelGreen = Color(Asset.marvelColorGreen.color)
-    static let marvelRed = Color(Asset.marvelColorRed.color)
+    static let marvelYellow = Color(Asset.Colors.marvelColorYellow.color)
+    static let marvelBlue = Color(Asset.Colors.marvelColorBlue.color)
+    static let marvelPink = Color(Asset.Colors.marvelColorPink.color)
+    static let marvelGreen = Color(Asset.Colors.marvelColorGreen.color)
+    static let marvelRed = Color(Asset.Colors.marvelColorRed.color)
     
     static func randomColorByIndex(index: Int) -> Color {
         let colorIndex = index % 4

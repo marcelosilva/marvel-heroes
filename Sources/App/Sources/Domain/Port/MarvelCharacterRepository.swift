@@ -10,6 +10,7 @@ import Shared
 
 public protocol MarvelCharacterRepositoryProtocol {
     func getCharacters(queryRequest: QueryRequest) -> AnyPublisher<[Character], NetworkError>
+    func getComics(characterId: Int) -> AnyPublisher<[Comic], NetworkError>
 }
 
 public struct QueryRequest {

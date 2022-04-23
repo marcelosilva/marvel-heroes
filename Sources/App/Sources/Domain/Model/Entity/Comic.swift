@@ -5,15 +5,17 @@
 //  Created by Marcelo Silva on 16/4/22.
 //
 
-public struct Comic: Equatable {
-    let id: Int
-    let title: String
-    let description: String
+import Foundation
 
-    public init(id: Int, title: String, description: String) {
+public struct Comic: Equatable {
+    public let id: Int
+    public let title: String
+    public let thumbnailUrl: String
+
+    public init(id: Int, title: String, thumbnailUrl: String) {
         self.id = id
         self.title = title
-        self.description = description
+        self.thumbnailUrl = thumbnailUrl
     }
     
 }

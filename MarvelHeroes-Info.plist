@@ -6,6 +6,11 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>marvel.dl.llnw.net</key>
+            <dict>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+            </dict>
 			<key>i.annihil.us</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>

@@ -5,7 +5,8 @@ strings:
       output: Sources/Presentation/Sources/Utils/Strings.swift
 xcassets:
   inputs:
-    - Sources/Presentation/Sources/Resources/Assets.xcassets
+    - Sources/Presentation/Sources/Resources/Colors.xcassets
+    - Sources/Presentation/Sources/Resources/Images.xcassets
   outputs:
     - templateName: swift5
       output: Sources/Presentation/Sources/Utils/Assets.swift

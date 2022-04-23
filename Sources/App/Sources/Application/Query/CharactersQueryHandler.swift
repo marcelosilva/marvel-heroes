@@ -10,7 +10,11 @@ import Combine
 public class CharactersQueryHandler {
     private let characterService: CharacterServiceProtocol
     
-    public init(characterService: CharacterServiceProtocol) {
+    public init() {
+        characterService = CharacterService(marvelRepository: MarvelCharacterRepositoryAdapter())
+    }
+    
+    init(characterService: CharacterServiceProtocol) {
         self.characterService = characterService
     }
     

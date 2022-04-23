@@ -1,4 +1,7 @@
 //
+//  ContentView.swift
+//  MarvelHeroes
+//
 // Created by Marcelo Silva on 20/4/22.
 //
 
@@ -6,40 +9,43 @@ import Combine
 import App
 import SwiftUI
 
-
-enum CharacterListViewState {
+public enum CharacterListViewState {
     case loading
     case loaded
 }
 
-enum CharacterListViewEvent {
-    case search(ContentViewData)
-    case load(ContentViewData)
+public enum CharacterListViewEvent {
+    case search(CharacterListViewData)
+    case load(CharacterListViewData)
     case selectItem(CharacterItem)
 }
 
 public class CharacterListViewModel: ObservableObject {
-    @Published var state: CharacterListViewState = .loaded
-    @Published var items = [CharacterItem]()
-    @Published var selectedItem: CharacterItem?
+    @Published public var state: CharacterListViewState = .loaded
+    @Published public var items = [CharacterItem]()
+    @Published public var selectedItem: CharacterItem?
     
     private var queryLimit = 20
     private var queryOffSet = 0
     private var cancellables: Set<AnyCancellable> = []
-    private let queryHandler = CharactersQueryHandler(
-            characterService: CharacterService(
-                    marvelRepository: MarvelCharacterRepositoryAdapter()
-            )
-    )
+    private let queryHandler: CharactersQueryHandler
+    
+    public init() {
+        queryHandler = CharactersQueryHandler()
+    }
+    
+    public init(queryHandler: CharactersQueryHandler) {
+        self.queryHandler = queryHandler
+    }
 
-    func process(event: CharacterListViewEvent) {
+    public func process(event: CharacterListViewEvent) {
         switch event {
         case .load(let contentViewData):
-            loadMore(eventData: contentViewData)
+            load(eventData: contentViewData)
         case .search(let contentViewData):
             queryOffSet = 0
             items = []
-            loadMore(eventData: contentViewData)
+            load(eventData: contentViewData)
         case .selectItem(let selectedItem):
             self.selectedItem = selectedItem
         }
@@ -47,7 +53,7 @@ public class CharacterListViewModel: ObservableObject {
 }
 
 private extension CharacterListViewModel {
-    func loadMore(eventData: ContentViewData) {
+    func load(eventData: CharacterListViewData) {
         if state == .loading {
             return
         }
@@ -83,7 +89,7 @@ private extension CharacterListViewModel {
             }).store(in: &cancellables)
         }
     
-    func buildQuery(eventData: ContentViewData) -> CharactersQuery {
+    func buildQuery(eventData: CharacterListViewData) -> CharactersQuery {
         CharactersQuery(
             limit: queryLimit,
             offset: queryOffSet,

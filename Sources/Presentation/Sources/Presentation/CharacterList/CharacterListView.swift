@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CharacterListView: View {
+public struct CharacterListView: View {
     @ObservedObject private var viewModel: CharacterListViewModel
     
     @State var popoverActive = false
@@ -15,14 +15,14 @@ struct CharacterListView: View {
     @State private var searchText: String
     @State private var sorting: Sorting
     
-    init(viewModel: CharacterListViewModel) {
+    public init(viewModel: CharacterListViewModel) {
         self.viewModel = viewModel
         _searchText = State(wrappedValue: "")
         _sorting = State(wrappedValue: .nameAsc)
         self.viewModel.process(event: .load(buildContentData()))
     }
                                
-    var body: some View {
+    public var body: some View {
         NavigationView {
             listView
                 .navigationTitle(L10n.navigationTitle)
@@ -41,7 +41,7 @@ struct CharacterListView: View {
                         Text(L10n.characterListViewSortByModifiedDesc)
                             .tag(Sorting.modifiedDesc)
                     }
-                    .onChange(of: sorting) { sorting in
+                    .onChange(of: sorting) { _ in
                         viewModel.process(event: .search(buildContentData()))
                     }.disabled(viewModel.state == .loading)
                 }
@@ -52,7 +52,6 @@ struct CharacterListView: View {
 }
 
 private extension CharacterListView {
-    
     var searchTextField: some View {
         TextField(L10n.characterListViewSearchPlaceholder, text: $searchText)
             .submitLabel(.search)
@@ -74,13 +73,12 @@ private extension CharacterListView {
         }
     }
     
-    @ViewBuilder
     func listItemView(item: CharacterItem) -> some View {
         HStack {
             AsyncImage(url: URL(string: item.thumbnailUrl)) { image in
                 image.resizable().scaledToFit()
             } placeholder: {
-                Image("Marvel")
+                Image(Asset.Images.marvel.name, bundle: Bundle.module)
                     .resizable()
                     .scaledToFit()
             }
@@ -100,8 +98,8 @@ private extension CharacterListView {
         }
     }
   
-    func buildContentData() -> ContentViewData {
-        ContentViewData(sorting: sorting, search: searchText)
+    func buildContentData() -> CharacterListViewData {
+        CharacterListViewData(sorting: sorting, search: searchText)
     }
 }
 

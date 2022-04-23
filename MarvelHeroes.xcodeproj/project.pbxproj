@@ -84,6 +84,7 @@
 		9CFBED84280B5BB2007B2141 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9CD8895628143453003BE18A /* swift-snapshot-testing */,
 				9C5365EB280DED2A003A6085 /* XCTest.framework */,
 			);
 			name = Frameworks;
@@ -294,7 +295,6 @@
 		9CA3B298280A03BD00945B11 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -326,7 +326,6 @@
 		9CA3B299280A03BD00945B11 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;

@@ -14,8 +14,8 @@ class MarvelNetworkEnvironment: NetworkEnvironmentProtocol {
     public var logMode: Bool = false
     public var serverTrust: Bool = true
     public var timeoutInterval = 10.0
-    public static let apiKey = "73c4e400a20ba680b43206fc0c239c7e" // to be stored safely
-    public static let privateKey = "518eb50b8ce0543dbdbefbb353d35582ea1aded4" // to be stored safely
+    public static let apiKey = "9dd70f4035c407fa55e899cd6036e746" // to be stored safely
+    public static let privateKey = "bbba345a2422db304d9c6725edab5b132527a4b5" // to be stored safely
 
     public static func getSecurityParameters() -> String {
         let ts = abs(UUID().hashValue)
@@ -31,6 +31,8 @@ public protocol MarvelHttpRepositoryProtocol {
         search: String?,
         sorting: String?
     ) -> AnyPublisher<CharactersResponse, NetworkError>
+    
+    func findComics(characterId: Int) -> AnyPublisher<ComicsResponse, NetworkError>
 }
 
 public class MarvelHttpRepository: MarvelHttpRepositoryProtocol {
@@ -62,38 +64,18 @@ public class MarvelHttpRepository: MarvelHttpRepositoryProtocol {
         }
         .eraseToAnyPublisher()
     }
-}
-
-public class CharactersEndpoint: NetworkEndpointProtocol, Equatable {
     
-    public var headers: [String: String]?
-    public var path: String = "/characters"
-    public var httpMethod = HTTPMethod.get
-
-    public static func getEndpoint(
-        limit: Int,
-        offset: Int,
-        search: String?,
-        sorting: String?
-    ) -> CharactersEndpoint {
-        let endpoint = CharactersEndpoint()
-        endpoint.path += "\(MarvelNetworkEnvironment.getSecurityParameters())&limit=\(limit)&offset=\(offset)"
-       
-        if let search = search, search.count > 0 {
-            let encodedSearch = search
-                .trimmingCharacters(in: .whitespacesAndNewlines)
-                .addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? search
-            endpoint.path += "&nameStartsWith=\(encodedSearch)"
+    public func findComics(characterId: Int) -> AnyPublisher<ComicsResponse, NetworkError> {
+        networkService.request(
+            with: ComicsByCharacterEndpoint.getEndpoint(characterId: characterId)
+        ).flatMap { data -> AnyPublisher<ComicsResponse, NetworkError> in
+            Just(data)
+                .setFailureType(to: NetworkError.self)
+                .eraseToAnyPublisher()
         }
-        
-        if let sorting = sorting {
-            endpoint.path += "&orderBy=\(sorting)"
+        .mapError { networkError in
+            networkError
         }
-        return endpoint
+        .eraseToAnyPublisher()
     }
-    
-    public static func == (lhs: CharactersEndpoint, rhs: CharactersEndpoint) -> Bool {
-        return lhs.path == rhs.path && lhs.httpMethod == rhs.httpMethod
-    }
-    
 }

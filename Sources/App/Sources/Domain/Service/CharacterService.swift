@@ -5,24 +5,27 @@
 //  Created by Marcelo Silva on 16/4/22.
 //
 import Combine
+import Foundation
 
-public protocol CharacterServiceProtocol {
+protocol CharacterServiceProtocol {
     func getCharacters(
         limit: Int,
         offset: Int,
         sorting: String?,
         search: String?
     )-> AnyPublisher<[Character], DomainError>
+    
+    func getComics(characterId: Int) -> AnyPublisher<[Comic], DomainError>
 }
 
-public class CharacterService: CharacterServiceProtocol {
+class CharacterService: CharacterServiceProtocol {
     private let marvelRepository: MarvelCharacterRepositoryProtocol
     
-    public init(marvelRepository: MarvelCharacterRepositoryProtocol) {
+    init(marvelRepository: MarvelCharacterRepositoryProtocol) {
         self.marvelRepository = marvelRepository
     }
     
-    public func getCharacters(
+    func getCharacters(
         limit: Int,
         offset: Int,
         sorting: String?,
@@ -40,5 +43,13 @@ public class CharacterService: CharacterServiceProtocol {
                 DomainError.repositoryConnectionError
             }
             .eraseToAnyPublisher()
+    }
+    
+    public func getComics(characterId: Int) -> AnyPublisher<[Comic], DomainError> {
+        marvelRepository.getComics(characterId: characterId)
+        .mapError { networkError in
+            DomainError.repositoryConnectionError
+        }
+        .eraseToAnyPublisher()
     }
 }

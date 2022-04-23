@@ -12,3 +12,4 @@
 "CharacterListView_SortByName" = "By Name";
 "CharacterListView_SortByModifiedDesc" = "By Last Modified";
 "CharacterListView_Search_Placeholder" = "Search";
+"CharacterDetailView_Comics" = "Comics";

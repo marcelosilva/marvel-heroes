@@ -10,6 +10,8 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+  /// Comics
+  internal static let characterDetailViewComics = L10n.tr("Localizable", "CharacterDetailView_Comics")
   /// Search
   internal static let characterListViewSearchPlaceholder = L10n.tr("Localizable", "CharacterListView_Search_Placeholder")
   /// By Last Modified
