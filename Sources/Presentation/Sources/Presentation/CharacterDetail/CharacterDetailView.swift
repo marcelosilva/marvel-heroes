@@ -27,37 +27,29 @@ public struct CharacterDetailView: View {
         )
     }
     
+    public init(character: CharacterItem, viewModel: CharacterDetailViewModel) {
+        self.character = character
+        self.viewModel = viewModel
+        self.viewModel.process(
+            event: .loadComics(
+                CharacterDetailViewData(
+                    characterId: character.characterId
+                )
+            )
+        )
+    }
+    
     public var body: some View {
         VStack(alignment: .trailing) {
-            HStack {
-                Image(systemName: "book.circle.fill")
-                    .resizable()
-                    .foregroundColor(Color.marvelRed)
-                    .frame(width: 20, height: 20)
-                    .padding(.trailing, 10)
-                    .onTapGesture {
-                        withAnimation {
-                            showComics.toggle()
-                        }
-                    }
-                
-                Image(systemName: "xmark")
-                    .resizable()
-                    .foregroundColor(Color.marvelRed)
-                    .frame(width: 20, height: 20)
-                    .padding(5)
-                    .onTapGesture {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-            }
-            .padding(.top, 10)
-            .padding(.trailing, 10)
-            
             detailScroll
             if showComics {
                 comicsScroll
             }
         }.background(Color.randomColorByIndex(index: character.id))
+    }
+    
+    func toggleShowComics() {
+        showComics.toggle()
     }
 }
 
@@ -65,7 +57,7 @@ public struct CharacterDetailView: View {
 private extension CharacterDetailView {
     var detailScroll: some View {
         ScrollView(showsIndicators: false) {
-            ZStack(alignment: .top) {
+            ZStack(alignment: .topTrailing) {
                 VStack {
                     ZStack {
                         Color.black
@@ -107,6 +99,30 @@ private extension CharacterDetailView {
                         .padding(.horizontal)
                     }
                 }
+                HStack {
+                    Image(systemName: "book.circle.fill")
+                        .resizable()
+                        .foregroundColor(Color.marvelRed)
+                        .frame(width: 20, height: 20)
+                        .padding(.trailing, 10)
+                        .onTapGesture {
+                            withAnimation {
+                                showComics.toggle()
+                            }
+                        }
+                    
+                    Image(systemName: "xmark")
+                        .resizable()
+                        .foregroundColor(Color.marvelRed)
+                        .frame(width: 20, height: 20)
+                        .padding(5)
+                        .padding(.trailing, 10)
+                        .onTapGesture {
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                }
+                .padding(.top, 10)
+                .padding(.trailing, 10)
             }
         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
     }

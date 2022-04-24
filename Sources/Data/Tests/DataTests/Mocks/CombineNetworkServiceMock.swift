@@ -16,9 +16,9 @@ public class CombineNetworkServiceMock: CombineNetworkServiceProtocol {
     var invokedRequestCount = 0
     var invokedRequestParameters: (endpoint: NetworkEndpointProtocol, Void)?
     var invokedRequestParametersList = [(endpoint: NetworkEndpointProtocol, Void)]()
-    var stubbedRequestResult: CharactersResponse!
+    var stubbedRequestResult: Decodable!
 
-    public func request<CharactersResponse>(with endpoint: NetworkEndpointProtocol) -> AnyPublisher<CharactersResponse, NetworkError> {
+    public func request<Decodable>(with endpoint: NetworkEndpointProtocol) -> AnyPublisher<Decodable, NetworkError> {
         invokedRequest = true
         invokedRequestCount += 1
         invokedRequestParameters = (endpoint, ())
@@ -29,7 +29,7 @@ public class CombineNetworkServiceMock: CombineNetworkServiceProtocol {
                 .eraseToAnyPublisher()
         }
         
-        return Just(dataStub as! CharactersResponse)
+        return Just(dataStub as! Decodable)
             .setFailureType(to: NetworkError.self)
             .eraseToAnyPublisher()
     }

@@ -7,10 +7,23 @@
 
 import XCTest
 import SnapshotTesting
-import Presentation
+@testable import Presentation
 import SwiftUI
+@testable import App
 
 class CharacterDetailViewTests: XCTestCase {
+    private var characterDetailViewModel: CharacterDetailViewModel!
+    private var characterServiceMock: CharacterServiceMock!
+    
+    override func setUp() async throws {
+        characterServiceMock = CharacterServiceMock()
+        characterDetailViewModel = CharacterDetailViewModel(
+            queryHandler: ComicsByCharacterQueryHandler(
+                characterService: characterServiceMock
+            )
+        )
+    }
+    
     func testDetailView() {
         // Given
         let sut = CharacterDetailView(

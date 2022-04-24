@@ -56,6 +56,41 @@ final class MarvelHttpRepositoryTests: XCTestCase {
         waitForExpectations(timeout: 3)
         
     }
+    
+    func testShouldFindComics() throws {
+        // Given
+        let json =
+        "{\"code\":200,\"status\":\"Ok\",\"data\":{\"offset\":0,\"limit\":20,\"total\":2602,\"count\":20,\"results\":[{\"id\":27238,\"digitalId\":0,\"title\":\"Wolverine Saga (2009) #7\",\"thumbnail\":{\"path\":\"http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available\",\"extension\":\"jpg\"}}]}}"
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .utf8
+        let data = Data(json)
+        let mockResponse = try JSONDecoder().decode(ComicsResponse?.self, from: data)
+        combineServiceMock.stubbedRequestResult = mockResponse
+        let exp = expectation(description: "Find Comics")
+        
+        // When
+        let result = sut.findComics(characterId: 1)
+        
+        // Then
+        XCTAssertEqual(combineServiceMock.invokedRequestCount, 1)
+        
+        result
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure:
+                    XCTFail("Test failed. error")
+                case .finished:
+                    break
+                }
+            }, receiveValue: { characters in
+                XCTAssertEqual(characters, mockResponse)
+                exp.fulfill()
+            })
+            .store(in: &cancellables)
+        
+        waitForExpectations(timeout: 3)
+        
+    }
 }
 
 
