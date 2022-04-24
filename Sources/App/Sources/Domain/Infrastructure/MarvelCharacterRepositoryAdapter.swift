@@ -20,7 +20,7 @@ class MarvelCharacterRepositoryAdapter: MarvelCharacterRepositoryProtocol {
         marvelHttpRepository = MarvelHttpRepository()
     }
 
-    public func getCharacters(queryRequest: QueryRequest) -> AnyPublisher<[Character], NetworkError> {
+    func getCharacters(queryRequest: QueryRequest) -> AnyPublisher<[Character], NetworkError> {
         marvelHttpRepository
                 .findCharacters(
                         limit: queryRequest.limit,
@@ -41,7 +41,7 @@ class MarvelCharacterRepositoryAdapter: MarvelCharacterRepositoryProtocol {
                 .eraseToAnyPublisher()
     }
 
-    public func getComics(characterId: Int) -> AnyPublisher<[Comic], NetworkError> {
+    func getComics(characterId: Int) -> AnyPublisher<[Comic], NetworkError> {
         marvelHttpRepository
             .findComics(characterId: characterId)
             .flatMap { [weak self] data -> AnyPublisher<[Comic], NetworkError> in
